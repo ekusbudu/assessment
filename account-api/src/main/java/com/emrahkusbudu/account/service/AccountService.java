@@ -37,7 +37,6 @@ public class AccountService {
     @Transactional
     public AccountDTO createAccount(AccountRequestDTO requestDTO) {
         try {
-
             double initialCredit = requestDTO.getInitialCredit();
             Customer customer = customerService.getCustomer(requestDTO.getCustomerId());
 
