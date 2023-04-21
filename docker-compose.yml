@@ -1,0 +1,22 @@
+version: '3'
+services:
+  transaction-api:
+    build:
+      context: ./transaction-api
+      dockerfile: Dockerfile
+    ports:
+      - "9080:9080"
+    depends_on:
+      - account-api
+    environment:
+      - ACCOUNT_API_URL=http://account-api:9090/account
+  account-api:
+    build:
+      context: ./account-api
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+      - ACCOUNT_API_URL=http://transaction-api:9080/account
+    volumes:
+      - ./data:/data
