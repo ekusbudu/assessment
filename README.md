@@ -20,18 +20,20 @@ The applications can be run with docker-compose <br>
 
 ###### Step 1 
 
-  run the maven command each project
-  
-  mvn clean install
-  
+run the maven command each project
+```
+$ mvn clean install
+```
 ###### Step 2 
-
-  run docker-compose up -d
-  
+run compose up command
+```
+$ docker-compose up -d
+``` 
 ##### ENDPOINTS & USAGE
 The applications endpoints can be accessed via curl or Swagger UI
 ###### Create Account
 
+```
 curl -X 'POST' \
   'http://localhost:9090/account-api/accounts' \
   -H 'accept: */*' \
@@ -41,14 +43,15 @@ curl -X 'POST' \
   "initialCredit": 15.99,
   "accountType": "CURRENT"
 }'
-
+```
 ###### Get Account
-
+```
 curl -X 'GET' \
   'http://localhost:9090/account-api/accounts/2' \
   -H 'accept: */*'
-  
+```
 ###### Add Balance
+```
 curl -X 'PATCH' \
   'http://localhost:9090/account-api/accounts/2' \
   -H 'accept: */*' \
@@ -56,9 +59,10 @@ curl -X 'PATCH' \
   -d '{
   "newBalance": 99.99
 }'
-
+```
 ###### Get UserInfo
-
+```
 curl -X 'GET' \
   'http://localhost:9090/account-api/customers/1' \
   -H 'accept: */*'
+```
