@@ -66,3 +66,28 @@ curl -X 'GET' \
   'http://localhost:9090/account-api/customers/1' \
   -H 'accept: */*'
 ```
+
+###### Create Transaction
+```
+curl -X 'POST' \
+  'http://localhost:9080/transaction-api/transactions/create' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "accountId": 1,
+  "amount": 45,
+  "first": false
+}'
+```
+###### Get Transaction
+```
+curl -X 'GET' \
+  'http://localhost:9080/transaction-api/transactions/1' \
+  -H 'accept: */*'
+``` 
+###### Get Account Transactions
+```
+curl -X 'GET' \
+  'http://localhost:9080/transaction-api/transactions/accounts/1,2' \
+  -H 'accept: */*'
+``` 
