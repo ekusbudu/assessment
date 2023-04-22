@@ -11,7 +11,11 @@ http://localhost:9090/account-api/swagger-ui/index.html#/ <br>
 http://localhost:9080/transaction-api/swagger-ui/index.html#/
 
 ##### H2 DB
-http://localhost:9090/account-api/h2-console/ <br>
+User: sa <br>
+Password: <br>
+JDBC URL: jdbc:h2:mem:testdb <br>
+
+http://localhost:9090/account-api/h2-console <br>
 http://localhost:9080/transaction-api/h2-console
 
 
