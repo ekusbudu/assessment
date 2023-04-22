@@ -21,10 +21,10 @@ public class TransactionWebClientService {
         this.webClientService = webClientService;
     }
 
-    public void createTransaction(TransactionRequestDTO transactionRequestDTO) {
+    public TransactionDTO createTransaction(TransactionRequestDTO transactionRequestDTO) {
         String endpointUrl = transactionServiceUrl + "/transactions/create";
-        webClientService
-                .makeWebClientRequest(endpointUrl, HttpMethod.POST, transactionRequestDTO, Void.class)
+        return webClientService
+                .makeWebClientRequest(endpointUrl, HttpMethod.POST, transactionRequestDTO, TransactionDTO.class)
                 .block();
     }
 

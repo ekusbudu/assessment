@@ -62,8 +62,14 @@ public class AccountServiceTest {
                 .customer(customer)
                 .balance(initialCredit)
                 .build();
+        AccountDTO expectedAccountDTO = AccountDTO.builder()
+                .accountType(AccountType.CURRENT)
+                .balance(initialCredit)
+                .build();
         when(customerService.getCustomer(customerId)).thenReturn(customer);
         when(accountRepository.save(any())).thenReturn(account);
+        when(modelMapper.map(account, AccountDTO.class)).thenReturn(expectedAccountDTO);
+
         TransactionRequestDTO transactionRequestDTO = new TransactionRequestDTO(account.getId(), initialCredit, true);
         // when
         AccountDTO result = accountService.createAccount(accountRequestDTO);

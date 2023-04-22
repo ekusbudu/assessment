@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -47,12 +48,14 @@ public class AccountService {
                     .build();
 
             accountRepository.save(account);
-
+            AccountDTO accountDto = modelMapper.map(account, AccountDTO.class);
             if (initialCredit > 0) {
-                transactionWebClientService.createTransaction(new TransactionRequestDTO(account.getId(), initialCredit, true));
+                TransactionDTO transaction = transactionWebClientService
+                        .createTransaction(new TransactionRequestDTO(account.getId(), initialCredit, true));
+                accountDto.setTransactionDTO(Arrays.asList( transaction));
             }
 
-            return modelMapper.map(account, AccountDTO.class);
+            return accountDto;
         } catch (Exception exception) {
             throw new AccountCreationException("Error creating account: " + requestDTO.toString() + " Exception: " + exception.getMessage());
         }
