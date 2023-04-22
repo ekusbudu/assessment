@@ -3,6 +3,7 @@ package com.emrahkusbudu.transaction.service;
 import com.emrahkusbudu.transaction.dto.AccountDTO;
 import com.emrahkusbudu.transaction.dto.TransactionDTO;
 import com.emrahkusbudu.transaction.dto.TransactionRequestDTO;
+import com.emrahkusbudu.transaction.dto.UpdateBalanceRequestDTO;
 import com.emrahkusbudu.transaction.entity.Transaction;
 import com.emrahkusbudu.transaction.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
@@ -43,14 +44,14 @@ public class TransactionService {
         transactionRepository.save(transaction);
 
         if (!transactionRequest.isFirst())
-            updateAccountBalance();
+            updateAccountBalance(transactionRequest);
 
         return transaction;
     }
 
-    void updateAccountBalance() {
-        String endpointUrl = accountServiceUrl + "/accounts/{accountId}";
-        webClientService.makeWebClientRequest(endpointUrl, HttpMethod.PATCH, new AccountDTO(), Void.class).block();
+    void updateAccountBalance(TransactionRequestDTO transactionRequest) {
+        String endpointUrl = accountServiceUrl + "/accounts/" + transactionRequest.getAccountId();
+        webClientService.makeWebClientRequest(endpointUrl, HttpMethod.PATCH, new UpdateBalanceRequestDTO(transactionRequest.getAmount()), Void.class).block();
     }
 
     public List<TransactionDTO> getTransactions(List<Long> accountIds) {
