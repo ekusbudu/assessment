@@ -88,6 +88,6 @@ curl -X 'GET' \
 ###### Get Account Transactions
 ```
 curl -X 'GET' \
-  'http://localhost:9080/transaction-api/transactions/accounts/1,2' \
+  'http://localhost:9080/transaction-api/transactions/accounts/1' \
   -H 'accept: */*'
 ``` 
