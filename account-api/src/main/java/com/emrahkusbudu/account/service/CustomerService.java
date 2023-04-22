@@ -30,8 +30,8 @@ public class CustomerService {
         this.modelMapper = modelMapper;
     }
 
-    public  Customer  getCustomer(Long accountId) {
-        return customerRepository.findById(accountId).orElseThrow(() -> new CustomerNotFoundException(accountId));
+    public  Customer  getCustomer(Long customerId) {
+        return customerRepository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException(customerId));
     }
 
     public CustomerDTO getCustomerInformation(Long customerId) {
