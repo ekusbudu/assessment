@@ -110,7 +110,7 @@ public class AccountServiceTest {
         when(modelMapper.map(account, AccountDTO.class)).thenReturn(expectedAccountDTO);
 
         // when
-        AccountDTO result = accountService.updateAccountBalance(accountId, request);
+        AccountDTO result = accountService.addBalanceToAccount(accountId, request);
 
         // then
         verify(accountRepository).findById(accountId);

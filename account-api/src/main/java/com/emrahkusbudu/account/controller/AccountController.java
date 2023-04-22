@@ -30,6 +30,6 @@ public class AccountController {
     @PatchMapping("/{accountId}")
     public ResponseEntity<AccountDTO> updateAccountBalance(@PathVariable("accountId") Long accountId,
                                                         @RequestBody UpdateBalanceRequestDTO request) {
-        return ResponseEntity.ok(accountService.updateAccountBalance(accountId, request));
+        return ResponseEntity.ok(accountService.addBalanceToAccount(accountId, request));
     }
 }

@@ -6,17 +6,12 @@ import com.emrahkusbudu.account.entity.Customer;
 import com.emrahkusbudu.account.enums.AccountType;
 import com.emrahkusbudu.account.exception.AccountCreationException;
 import com.emrahkusbudu.account.exception.AccountNotFoundException;
-import com.emrahkusbudu.account.exception.CustomerNotFoundException;
 import com.emrahkusbudu.account.repository.AccountRepository;
-import com.emrahkusbudu.account.repository.CustomerRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
@@ -69,7 +64,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public AccountDTO updateAccountBalance(Long accountId, UpdateBalanceRequestDTO request) {
+    public AccountDTO addBalanceToAccount(Long accountId, UpdateBalanceRequestDTO request) {
         Account presentAccount = this.getAccount(accountId);
         AtomicReference<Double> atomicBalance = new AtomicReference<>(presentAccount.getBalance());
         atomicBalance.updateAndGet(currentBalance -> currentBalance + request.getNewBalance());
