@@ -1,6 +1,5 @@
 package com.emrahkusbudu.transaction.service;
 
-import com.emrahkusbudu.transaction.dto.AccountDTO;
 import com.emrahkusbudu.transaction.dto.TransactionDTO;
 import com.emrahkusbudu.transaction.dto.TransactionRequestDTO;
 import com.emrahkusbudu.transaction.dto.UpdateBalanceRequestDTO;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +21,7 @@ public class TransactionService {
     private final WebClientService webClientService;
     private final ModelMapper modelMapper;
 
-    @Value("${account.service.url}")
+    @Value("${ACCOUNT_API_URL}")
     private String accountServiceUrl;
 
     public TransactionService(TransactionRepository transactionRepository, WebClientService webClientService, ModelMapper modelMapper) {

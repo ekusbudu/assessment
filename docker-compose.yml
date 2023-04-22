@@ -9,7 +9,7 @@ services:
     depends_on:
       - account-api
     environment:
-      - ACCOUNT_API_URL=http://account-api:9090/account
+      - ACCOUNT_API_URL=http://account-api:9090/account-api
   account-api:
     build:
       context: ./account-api
@@ -17,6 +17,6 @@ services:
     ports:
       - "9090:9090"
     environment:
-      - ACCOUNT_API_URL=http://transaction-api:9080/account
+      - TRANSACTION_API_URL=http://transaction-api:9080/transaction-api
     volumes:
       - ./data:/data

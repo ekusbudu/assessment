@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class TransactionWebClientService {
     private final WebClientService webClientService;
 
-    @Value("${transaction.service.url}")
+    @Value("${TRANSACTION_API_URL}")
     private String transactionServiceUrl;
 
     public TransactionWebClientService(WebClientService webClientService) {
