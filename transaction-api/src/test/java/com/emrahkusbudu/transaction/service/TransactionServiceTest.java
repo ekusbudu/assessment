@@ -1,5 +1,6 @@
 package com.emrahkusbudu.transaction.service;
 
+import com.emrahkusbudu.transaction.dto.TransactionDTO;
 import com.emrahkusbudu.transaction.dto.TransactionRequestDTO;
 import com.emrahkusbudu.transaction.dto.UpdateBalanceRequestDTO;
 import com.emrahkusbudu.transaction.entity.Transaction;
@@ -21,7 +22,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 
@@ -54,12 +54,17 @@ public class TransactionServiceTest {
                 .accountId(1L)
                 .amount(100.00)
                 .build();
+        TransactionDTO transactionDto = TransactionDTO.builder()
+                .id(transactionId)
+                .accountId(1L)
+                .amount(100.00)
+                .build();
         when(transactionRepository.findById(transactionId)).thenReturn(Optional.of(transaction));
+        when(modelMapper.map(transaction, TransactionDTO.class)).thenReturn(transactionDto);
+        TransactionDTO result = transactionService.getTransaction(transactionId);
 
-        Optional<Transaction> result = transactionService.getTransaction(transactionId);
-
-        assertTrue(result.isPresent());
-        assertEquals(transactionId, result.get().getId());
+        assertNotNull(result);
+        assertEquals(transactionId, result.getId());
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.emrahkusbudu.transaction.dto.TransactionDTO;
 import com.emrahkusbudu.transaction.dto.TransactionRequestDTO;
 import com.emrahkusbudu.transaction.dto.UpdateBalanceRequestDTO;
 import com.emrahkusbudu.transaction.entity.Transaction;
+import com.emrahkusbudu.transaction.exception.TransactionNotFoundException;
 import com.emrahkusbudu.transaction.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -30,12 +31,13 @@ public class TransactionService {
         this.webClientService = webClientService;
         this.modelMapper = modelMapper;
     }
-    public Optional<Transaction> getTransaction(Long transactionId) {
-        return transactionRepository.findById(transactionId);
+    public  TransactionDTO  getTransaction(Long transactionId) {
+        Transaction transaction = transactionRepository.findById(transactionId).orElseThrow(() -> new TransactionNotFoundException(transactionId));
+        return modelMapper.map(transaction, TransactionDTO.class);
     }
 
     @Transactional
-    public Transaction createTransaction(TransactionRequestDTO transactionRequest) {
+    public TransactionDTO createTransaction(TransactionRequestDTO transactionRequest) {
         Transaction transaction = Transaction
                 .builder()
                 .accountId(transactionRequest.getAccountId())
@@ -46,7 +48,7 @@ public class TransactionService {
         if (!transactionRequest.isFirst())
             updateAccountBalance(transactionRequest);
 
-        return transaction;
+        return modelMapper.map(transaction, TransactionDTO.class) ;
     }
 
     void updateAccountBalance(TransactionRequestDTO transactionRequest) {

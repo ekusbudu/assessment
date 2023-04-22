@@ -20,17 +20,13 @@ public class TransactionController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionRequestDTO transactionRequest) {
-        Transaction transaction = transactionService.createTransaction(transactionRequest);
-        return ResponseEntity.ok(transaction);
+    public ResponseEntity<TransactionDTO> createTransaction(@RequestBody TransactionRequestDTO transactionRequest) {
+        return ResponseEntity.ok(transactionService.createTransaction(transactionRequest));
     }
 
-
     @GetMapping("/{transactionId}")
-    public ResponseEntity<Transaction> getTransaction(@PathVariable("transactionId") Long transactionId) {
-        Optional<Transaction> transaction = transactionService.getTransaction(transactionId);
-        return transaction.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<TransactionDTO> getTransaction(@PathVariable("transactionId") Long transactionId) {
+        return ResponseEntity.ok(transactionService.getTransaction(transactionId));
     }
 
     @GetMapping("/accounts/{accountIds}")
