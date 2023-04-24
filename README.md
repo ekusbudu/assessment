@@ -18,6 +18,9 @@ JDBC URL: jdbc:h2:mem:testdb <br>
 http://localhost:9090/account-api/h2-console <br>
 http://localhost:9080/transaction-api/h2-console
 
+##### SAMPLE CUSTOMER
+![image](https://user-images.githubusercontent.com/4302984/233875915-19744b79-f760-4468-9457-b6ab84131574.png)
+
 
 ##### HOW TO RUN
 The applications can be run with docker-compose <br>
